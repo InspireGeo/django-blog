@@ -5,6 +5,7 @@
          "": "html"
     },
     "totvsLanguageServer.welcomePage": false,
+    "git.ignoreLimitWarning": true,
 }
     
 
