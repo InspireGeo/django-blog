@@ -25,5 +25,6 @@ urlpatterns = [
     path('about', views.about, name="about"),
     path('article/',include("article.urls")),
     path('user/',include("user.urls")),
+    path('api/',include("article.api.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
