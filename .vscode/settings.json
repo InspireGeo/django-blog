@@ -1,4 +1,10 @@
 {
+
+    //"python.pythonPath": "<Bu satır zaten olmalı, oynamıyoruz>/Python.framework/Versions/3.8/bin/python3.8",
+    "python.autoComplete.extraPaths": [
+        "/home/aytacaraz/Dokumente/blog/newenv/lib/python3.7/site-packages",
+      ],
+
     /*"totvsLanguageServer.welcomePage": false,
 */
     "emmet.includeLanguages": {

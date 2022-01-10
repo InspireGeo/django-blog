@@ -2,15 +2,15 @@ from rest_framework import status
 from rest_framework.response import Response 
 # from rest_framework.decorators import api_view
 
-from articlemodels import Makale, Gazeteci
-from haberler.api.serializers import MakaleSerializer, GazeteciSerializer
+from article.models import Article
+from article.api.serializers import ArticleSerializer
 
 #class views
 from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 
 
-
+""" 
 class GazeteciListCreateAPIView(APIView):
     def get(self, request):
         yazarlar = Gazeteci.objects.all()
@@ -24,46 +24,46 @@ class GazeteciListCreateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+ """
 
 
-
-class MakaleListCreateAPIView(APIView):
+class ArticleListCreateAPIView(APIView):
     def get(self, request):
-        makaleler = Makale.objects.filter(aktif=True) 
-        serializer = MakaleSerializer(makaleler, many=True) 
+        articles= Article.objects.filter() 
+        serializer =ArticleSerializer(articles, many=True) 
         return Response(serializer.data)
 
 
     def post(self, request):
-        serializer = MakaleSerializer(data=request.data)
+        serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class MakaleDetailAPIView(APIView):
+class ArticleDetailAPIView(APIView):
 
     def get_object(self, pk):
-        makale_instance = get_object_or_404(Makale, pk=pk)
-        return makale_instance
+        article_instance = get_object_or_404(Article, pk=pk)
+        return article_instance
 
     def get(self, request, pk):
-        makale = self.get_object(pk=pk)
-        serializer = MakaleSerializer(makale) 
+        article = self.get_object(pk=pk)
+        serializer = ArticleSerializer(article) 
         return Response(serializer.data)       
 
     def put(self, request, pk):
-        makale = self.get_object(pk=pk)
-        serializer = MakaleSerializer(makale, data=request.data)
+        article= self.get_object(pk=pk)
+        serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
 
     def delete(self, request, pk):
-        makale = self.get_object(pk=pk)
-        makale.delete()
+        article = self.get_object(pk=pk)
+        article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
